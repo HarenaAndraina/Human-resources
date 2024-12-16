@@ -1,0 +1,83 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Liste des postes{% endblock %}
+
+{% block cssplugins %}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/entity-list.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Poste</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Liste des postes</h6>
+                    <a href="{{ path('app_poste_new') }}" type="button" class="btn btn-primary btn-icon-text">
+                        <i class="btn-icon-prepend" data-feather="plus-circle"></i>
+                        Créer un nouveau poste
+                    </a>
+                    <div class="table-responsive pt-3">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Identifiant</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for poste in postes %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('app_poste_show', {"id": poste.id}) }}">{{ poste.id }}</a>
+                                    </td>
+                                    <td>{{ poste.nom }}</td>
+                                    <td class="description-column">
+                                        {{ poste.description }}
+                                    </td>
+                                    <td class="actions-column">
+                                        <a href="{{ path('app_poste_edit', {"id": poste.id}) }}"
+                                           type="button" class="btn btn-primary btn-icon">
+                                            <i data-feather="edit"></i>
+                                        </a>
+                                        <button type="button"
+                                                data-route="{{ path('app_poste_delete', {"id": poste.id}) }}"
+                                                data-token="{{ csrf_token('delete' ~ poste.id) }}"
+                                                class="btn btn-danger btn-icon btn-delete">
+                                            <i data-feather="trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="9">Pas encore de postes.</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsplugins %}
+    <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('assets/js/entity-list.js') }}"></script>
+    {% include 'partials/_success.html.twig' %}
+{% endblock %}

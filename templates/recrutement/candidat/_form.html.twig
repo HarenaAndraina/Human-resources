@@ -1,0 +1,102 @@
+{{ form_start(form) }}
+
+<div class="row mb-3">
+	<label for="{{ form.nom.vars.id }}" class="col-sm-3 col-form-label">Nom</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.nom, {'attr': {'class': form.nom.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Nom'}}) }}
+		<div class="invalid-feedback">
+			{% if form.nom.vars.errors|length > 0 %}
+				{{ form.nom.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label for="{{ form.prenom.vars.id }}" class="col-sm-3 col-form-label">Prénom</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.prenom, {'attr': {'class': form.prenom.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Prénom'}}) }}
+		<div class="invalid-feedback">
+			{% if form.prenom.vars.errors|length > 0 %}
+				{{ form.prenom.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label for="{{ form.email.vars.id }}" class="col-sm-3 col-form-label">Email</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.email, {'attr': {'class': form.email.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Email'}}) }}
+		<div class="invalid-feedback">
+			{% if form.email.vars.errors|length > 0 %}
+				{{ form.email.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label for="{{ form.telephone.vars.id }}" class="col-sm-3 col-form-label">Téléphone</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.telephone, {'attr': {'class': form.telephone.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Téléphone'}}) }}
+		<div class="invalid-feedback">
+			{% if form.telephone.vars.errors|length > 0 %}
+				{{ form.telephone.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label for="{{ form.nomFichierCV.vars.id }}" class="col-sm-3 col-form-label">Nom du fichier CV</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.nomFichierCV, {'attr': {'class': form.nomFichierCV.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Nom du fichier CV'}}) }}
+		<div class="invalid-feedback">
+			{% if form.nomFichierCV.vars.errors|length > 0 %}
+				{{ form.nomFichierCV.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label for="{{ form.offreEmplois.vars.id }}" class="col-sm-3 col-form-label">Offres d'Emploi</label>
+	<div class="col-sm-9">
+		{{ form_widget(form.offreEmplois, {'attr': {'class': form.offreEmplois.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+		<div class="invalid-feedback">
+			{% if form.offreEmplois.vars.errors|length > 0 %}
+				{{ form.offreEmplois.vars.errors[0].message }}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<button type="submit" class="btn btn-primary me-2">{{ button_label|default('Soumettre') }}</button>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to get the value of a URL parameter
+        function getUrlParameter(name) {
+            var url = new URL(window.location.href);
+            var params = new URLSearchParams(url.search);
+            return params.get(name);
+        }
+
+        // Get the "offre_emploi_id" from the URL
+        var offreEmploiId = getUrlParameter('offre_emploi_id');
+
+        // If the "offre_emploi_id" is found in the URL, select it in the form
+        if (offreEmploiId) {
+            var offreEmploisSelect = document.getElementById("{{ form.offreEmplois.vars.id }}"); // Get the select element by its ID
+            if (offreEmploisSelect) {
+                // Set the value of the select element to the "offre_emploi_id"
+                offreEmploisSelect.value = offreEmploiId;
+
+                // Trigger a change event to ensure any JavaScript-dependent changes happen
+                var event = new Event('change');
+                offreEmploisSelect.dispatchEvent(event);
+            }
+        }
+    });
+</script>
+{{ form_end(form) }}

@@ -1,0 +1,132 @@
+J'aurai une question à te poser dans symfony si tel est ma base de données
+postgres=# \c gestion_entreprise_rh;
+Vous êtes maintenant connecté à la base de données « gestion_entreprise_rh » en tant qu'utilisateur « postgres ».
+gestion_entreprise_rh=# \d utilisateur;
+                            Table ½ public.utilisateur ╗
+    Colonne     |          Type          | Collationnement | NULL-able | Par dÚfaut
+----------------+------------------------+-----------------+-----------+------------
+ id             | character varying(255) |                 | not null  |
+ id_departement | character varying(255) |                 | not null  |
+ id_poste       | character varying(255) |                 | not null  |
+ id_contrat     | character varying(255) |                 | not null  |
+ nom            | character varying(70)  |                 | not null  |
+ prenom         | character varying(70)  |                 | not null  |
+ email          | character varying(180) |                 | not null  |
+ telephone      | character varying(255) |                 | not null  |
+ date_naissance | date                   |                 | not null  |
+ salaire        | numeric(18,2)          |                 | not null  |
+ roles          | json                   |                 | not null  |
+ password       | character varying(255) |                 | not null  |
+Index :
+    "utilisateur_pkey" PRIMARY KEY, btree (id)
+    "idx_1d1c63b3920c4e9b" btree (id_poste)
+    "idx_1d1c63b3d9649694" btree (id_departement)
+    "uniq_1d1c63b3bea930e3" UNIQUE, btree (id_contrat)
+    "uniq_identifier_email" UNIQUE, btree (email)
+Contraintes de clÚs ÚtrangÞres :
+    "fk_1d1c63b3920c4e9b" FOREIGN KEY (id_poste) REFERENCES poste(id)
+    "fk_1d1c63b3bea930e3" FOREIGN KEY (id_contrat) REFERENCES contrat(id)
+    "fk_1d1c63b3d9649694" FOREIGN KEY (id_departement) REFERENCES departement(id)
+RÚfÚrencÚ par :
+    TABLE "evaluation" CONSTRAINT "fk_1323a57557afe0e9" FOREIGN KEY (juge_id) REFERENCES utilisateur(id)
+    TABLE "evaluation" CONSTRAINT "fk_1323a575fb88e14f" FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+    TABLE "entretien_recruteur" CONSTRAINT "fk_21864b7abe6dbab" FOREIGN KEY (id_recruteur) REFERENCES utilisateur(id)
+    TABLE "competence_employee" CONSTRAINT "fk_8630f4c8fb88e14f" FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+
+gestion_entreprise_rh=# \d evaluation;
+                              Table ½ public.evaluation ╗
+     Colonne     |          Type          | Collationnement | NULL-able |  Par dÚfaut
+-----------------+------------------------+-----------------+-----------+---------------
+ id              | character varying(255) |                 | not null  |
+ date_evaluation | date                   |                 | not null  |
+ juge_id         | character varying(255) |                 | not null  |
+ utilisateur_id  | character varying(255) |                 | not null  |
+ score_moyenne   | numeric(5,2)           |                 |           | NULL::numeric
+Index :
+    "evaluation_pkey" PRIMARY KEY, btree (id)
+    "idx_1323a57557afe0e9" btree (juge_id)
+    "idx_1323a575fb88e14f" btree (utilisateur_id)
+Contraintes de clÚs ÚtrangÞres :
+    "fk_1323a57557afe0e9" FOREIGN KEY (juge_id) REFERENCES utilisateur(id)
+    "fk_1323a575fb88e14f" FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+RÚfÚrencÚ par :
+    TABLE "detail_evaluation" CONSTRAINT "fk_a83915a3456c5646" FOREIGN KEY (evaluation_id) REFERENCES evaluation(id)
+    TABLE "feedback" CONSTRAINT "fk_d2294458456c5646" FOREIGN KEY (evaluation_id) REFERENCES evaluation(id)
+
+Et que dans mon symfony voici les classes que j'ai crée
+#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Utilisateur extends AbstractPartiePrenante implements UserInterface, PasswordAuthenticatedUserInterface
+{
+    #[ORM\Id]
+    
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 18, scale: 2)]
+    private ?string $salaire = null;
+
+    #[ORM\ManyToOne(inversedBy: 'utilisateurs',)]
+    #[ORM\JoinColumn(name: "id_departement", nullable: false)]
+    private ?Departement $departement = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: "id_poste", nullable: false)]
+    private ?Poste $poste = null;
+
+    #[ORM\OneToOne(inversedBy: 'utilisateur', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(name: "id_contrat", nullable: false)]
+    private ?Contrat $contrat = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+}
+}
+Et pour
+#[ORM\Entity(repositoryClass: EvaluationRepository::class)]
+class Evaluation
+{
+    #[ORM\Id]
+    #[ORM\Column(type: "string", length: 255)]
+    private string $id;
+
+    #[ORM\Column(type: "date")]
+    private DateTime $dateEvaluation;
+
+    #[ORM\Column(type: "decimal", precision: 5, scale: 2, nullable: true)]
+    private ?float $scoreMoyenne;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "id", name:"utilisateur_id")]
+    private Utilisateur $utilisateur;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "id", name:"juge_id")]
+    private Utilisateur $juge;
+Voici la fonction que j'ai crée
+public function findEvaluationsByUtilisateur(string $utilisateurId): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.utilisateur.id = :utilisateur_id') // Utilisation de l'ID de l'utilisateur
+            ->setParameter('utilisateur_id', $utilisateurId)
+            ->orderBy('e.dateEvaluation', 'DESC') // Tri par date décroissante
+            ->getQuery()
+            ->getResult();
+    }
+Et cela ne fonctionne pas 
+
+CHANGE MASTER TO
+    MASTER_HOST='192.168.36.83',       -- IP de Server A
+    MASTER_USER='repl',
+    MASTER_PASSWORD='1234',
+    MASTER_LOG_FILE='mysql-bin.000001', -- remplacer par le fichier obtenu de Server A
+    MASTER_LOG_POS=328;                -- remplacer par la position obtenue de Server A

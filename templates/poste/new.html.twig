@@ -1,0 +1,31 @@
+{% extends '_layout.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Poste</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nouveau</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Créer un nouveau poste</h6>
+                    {% include 'poste/_form.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsplugins %}
+    <script src="{{ asset('assets/vendors/tinymce/tinymce.min.js') }}"></script>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('assets/js/poste-tinymce.js') }}"></script>
+{% endblock %}

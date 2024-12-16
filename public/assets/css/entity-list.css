@@ -1,0 +1,11 @@
+.description-column {
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 300px;
+}
+
+.actions-column {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

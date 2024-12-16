@@ -1,0 +1,54 @@
+{{ form_start(form) }}
+
+<div class="row mb-3">
+    <label for="{{ form.dateEvaluation.vars.id }}" class="col-sm-3 col-form-label">Date de l'évaluation</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.dateEvaluation, {'attr': {'class': 'form-control', 'placeholder': 'Date de l\'évaluation'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.juge.vars.id }}" class="col-sm-3 col-form-label">Juge</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.juge, {'attr': {'class': 'form-control', 'placeholder': 'Juge'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.detailEvaluation.comportement.vars.id }}" class="col-sm-3 col-form-label">Comportement</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.detailEvaluation.comportement, {'attr': {'class': 'form-control', 'placeholder': 'Comportement'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.detailEvaluation.attitude.vars.id }}" class="col-sm-3 col-form-label">Attitude</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.detailEvaluation.attitude, {'attr': {'class': 'form-control', 'placeholder': 'Attitude'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.detailEvaluation.competence.vars.id }}" class="col-sm-3 col-form-label">Compétence</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.detailEvaluation.competence, {'attr': {'class': 'form-control', 'placeholder': 'Compétence'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.detailEvaluation.connaissance.vars.id }}" class="col-sm-3 col-form-label">Connaissance</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.detailEvaluation.connaissance, {'attr': {'class': 'form-control', 'placeholder': 'Connaissance'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.detailEvaluation.administrative.vars.id }}" class="col-sm-3 col-form-label">Administrative</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.detailEvaluation.administrative, {'attr': {'class': 'form-control', 'placeholder': 'Administrative'}}) }}
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary me-2">{{ button_label|default('Soumettre') }}</button>
+
+{{ form_end(form) }}

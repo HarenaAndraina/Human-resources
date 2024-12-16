@@ -1,0 +1,28 @@
+{% extends '_layout.html.twig' %}
+
+{% block breadcrumbs %}
+	<nav class="page-breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="#">Demande congé</a>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">Nouveau</li>
+		</ol>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+                    <h6 class="card-title">Créer un nouveau demande de congé</h6>
+                    
+					{{ include('conge/demande_conge/_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

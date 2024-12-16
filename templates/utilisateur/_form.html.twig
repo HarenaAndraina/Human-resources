@@ -1,0 +1,89 @@
+{{ form_start(form) }}
+
+<div class="row mb-3">
+    <label for="{{ form.nom.vars.id }}" class="col-sm-3 col-form-label">Nom</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.prenom.vars.id }}" class="col-sm-3 col-form-label">Prénom</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.email.vars.id }}" class="col-sm-3 col-form-label">Adresse email</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse email'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.telephone.vars.id }}" class="col-sm-3 col-form-label">Numéro de téléphone</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Numéro de téléphone'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.roles.vars.id }}" class="col-sm-3 col-form-label">Rôle</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.roles, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionner un rôle'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.dateNaissance.vars.id }}" class="col-sm-3 col-form-label">Date de naissance</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control', 'placeholder': 'Date de naissance'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.debutActivite.vars.id }}" class="col-sm-3 col-form-label">Début d’activité</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.debutActivite, {'attr': {'class': 'form-control', 'placeholder': 'Début d’activité'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.salaire.vars.id }}" class="col-sm-3 col-form-label">Salaire</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.salaire, {'attr': {'class': 'form-control', 'placeholder': 'Salaire'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.departement.vars.id }}" class="col-sm-3 col-form-label">Département</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.departement, {'attr': {'class': 'form-control', 'placeholder': 'Département'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.poste.vars.id }}" class="col-sm-3 col-form-label">Poste</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.poste, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.password.vars.id }}" class="col-sm-3 col-form-label">Password</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.contrat.vars.id }}" class="col-sm-3 col-form-label">Contrat</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.contrat, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary me-2">{{ button_label|default('Sauvegarder') }}</button>
+
+{{ form_end(form) }}

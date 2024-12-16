@@ -1,0 +1,101 @@
+{{ form_start(form) }}
+
+<div class="row mb-3">
+    <label for="{{ form.titre.vars.id }}" class="col-sm-3 col-form-label">Titre de l'offre</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.titre, {'attr': {'class': form.titre.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Titre de l\'offre'}}) }}
+        <div class="invalid-feedback">
+            {% if form.titre.vars.errors|length > 0 %}
+                {{ form.titre.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.description.vars.id }}" class="col-sm-3 col-form-label">Description de l'offre</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.description, {'attr': {'class': form.description.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Description de l\'offre'}}) }}
+        <div class="invalid-feedback">
+            {% if form.description.vars.errors|length > 0 %}
+                {{ form.description.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.salaireMinimum.vars.id }}" class="col-sm-3 col-form-label">Salaire minimum</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.salaireMinimum, {'attr': {'class': form.salaireMinimum.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Salaire minimum'}}) }}
+        <div class="invalid-feedback">
+            {% if form.salaireMinimum.vars.errors|length > 0 %}
+                {{ form.salaireMinimum.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.salaireMaximum.vars.id }}" class="col-sm-3 col-form-label">Salaire maximum</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.salaireMaximum, {'attr': {'class': form.salaireMaximum.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Salaire maximum'}}) }}
+        <div class="invalid-feedback">
+            {% if form.salaireMaximum.vars.errors|length > 0 %}
+                {{ form.salaireMaximum.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.dateHeureCreation.vars.id }}" class="col-sm-3 col-form-label">Date et heure de création</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.dateHeureCreation, {'attr': {'class': form.dateHeureCreation.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.dateHeureCreation.vars.errors|length > 0 %}
+                {{ form.dateHeureCreation.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.dateExpiration.vars.id }}" class="col-sm-3 col-form-label">Date d'expiration</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.dateExpiration, {'attr': {'class': form.dateExpiration.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.dateExpiration.vars.errors|length > 0 %}
+                {{ form.dateExpiration.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.statut.vars.id }}" class="col-sm-3 col-form-label">Statut</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.statut, {'attr': {'class': form.statut.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.statut.vars.errors|length > 0 %}
+                {{ form.statut.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label for="{{ form.poste.vars.id }}" class="col-sm-3 col-form-label">Poste</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.poste, {'attr': {'class': form.poste.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.poste.vars.errors|length > 0 %}
+                {{ form.poste.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary me-2">{{ button_label|default('Soumettre') }}</button>
+
+{{ form_end(form) }}

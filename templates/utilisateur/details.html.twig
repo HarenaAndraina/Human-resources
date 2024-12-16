@@ -1,0 +1,101 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block cssplugins %}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/entity-list.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Utilisateur</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Détails</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <!-- Section Titre -->
+    <div class="page-header mb-4">
+        <h1>Détails de l'utilisateur : {{ utilisateur.nom }}</h1>
+    </div>
+
+    <!-- Informations de l'utilisateur -->
+    <div class="card mb-4">
+        <div class="card-header">Informations de l'utilisateur</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Téléphone</th>
+                            <th>Date de naissance</th>
+                            <th>Salaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ utilisateur.id }}</a></td>
+                            <td>{{ utilisateur.nom }}</td>
+                            <td>{{ utilisateur.prenom }}</td>
+                            <td>{{ utilisateur.email }}</td>
+                            <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+                            <td>{{ utilisateur.telephone }}</td>
+                            <td>{{ utilisateur.dateNaissance ? utilisateur.dateNaissance|date('d-m-Y') : 'Non spécifié' }}</td>
+                            <td>{{ utilisateur.salaire }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section des évaluations -->
+    <div class="card mb-4">
+        <div class="card-header">Évaluations</div>
+        <div class="card-body">
+            {% if evaluations is not empty %}
+                <p><strong>Score moyen global :</strong> {{ moyenne ? moyenne|number_format(2) : 'Non calculé' }}</p>
+                
+                <div class="mb-3">
+                    <a href="{{ path('details_evaluation_utilisateur', {'id': utilisateur.id}) }}" class="btn btn-primary">
+                        Détails des évaluations
+                    </a>
+                </div>
+            {% else %}
+                <p>Aucune évaluation disponible.</p>
+                <a href="{{ path('app_evaluation_new', { id: utilisateur.id }) }}" 
+                type="button" 
+                class="btn btn-primary btn-icon-text mr-3">
+                    Ajouter une évaluation
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <!-- Section du contrat -->
+    <div class="card mb-4">
+        <div class="card-header">Contrat</div>
+        <div class="card-body">
+            {% if contrat %}
+                <p><strong>Date de début :</strong> {{ contrat.dateDebut|date('d-m-Y') }}</p>
+                <p><strong>Durée :</strong> {{ contrat.duree ? contrat.duree ~ ' mois' : 'Non spécifié' }}</p>
+                <p><strong>Type de contrat :</strong> {{ contrat.type ? contrat.type.designation : 'Non spécifié' }}</p>
+            {% else %}
+                <p>Aucun contrat trouvé pour cet utilisateur.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsplugins %}
+    <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+{% endblock %}

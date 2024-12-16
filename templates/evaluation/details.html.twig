@@ -1,0 +1,56 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Détails des Évaluations{% endblock %}
+
+{% block content %}
+<div class="page-header mb-4">
+    <h1>Details evaluation {{detailsEvaluations[0].evaluation.utilisateur.id}}</h1>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+    <!-- Nouveau utilisateur button -->
+    <div class="col-auto mb-3">
+        <a href="{{ path('app_evaluation_new', { id: detailsEvaluations[0].evaluation.utilisateur.id }) }}" 
+        type="button" 
+        class="btn btn-primary btn-icon-text mr-3">
+            Ajouter une évaluation
+        </a>
+    </div>
+        {% if detailsEvaluations is not empty %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Comportement</th>
+                        <th>Attitude</th>
+                        <th>Compétence</th>
+                        <th>Connaissance</th>
+                        <th>Administrative</th>
+                        <th>Moyenne</th>
+                        <th>Juge</th>
+                        <th>Date d'evaluation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in detailsEvaluations %}
+                        <tr>
+                            <td>{{ detail.comportement ? detail.comportement|number_format(2) : 'N/A' }}</td>
+                            <td>{{ detail.attitude ? detail.attitude|number_format(2) : 'N/A' }}</td>
+                            <td>{{ detail.competence ? detail.competence|number_format(2) : 'N/A' }}</td>
+                            <td>{{ detail.connaissance ? detail.connaissance|number_format(2) : 'N/A' }}</td>
+                            <td>{{ detail.administrative ? detail.administrative|number_format(2) : 'N/A' }}</td>
+                            <td>{{ detail.evaluation.scoreMoyenne }}</td>
+                            <td>{{ detail.evaluation.juge.nom }}</td>
+                            <td>{{ detail.evaluation.dateEvaluation|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune évaluation détaillée trouvée pour cet utilisateur.</p>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{{ path('utilisateur_details',{'id':id}) }}" class="btn btn-secondary">Retour</a>
+{% endblock %}

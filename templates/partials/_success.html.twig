@@ -1,0 +1,5 @@
+{% for message in app.flashes('success') %}
+    <script>
+        showSuccessFulToast("{{ message }}");
+    </script>
+{% endfor %}

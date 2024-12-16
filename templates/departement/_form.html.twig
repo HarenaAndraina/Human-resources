@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    <div class="row mb-3">
+        <label for="{{ form.nom.vars.id }}" class="col-sm-3 col-form-label">Nom</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.nom, {'attr': {'class': form.nom.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Nom du département'}}) }}
+            <div class="invalid-feedback">
+                {% if form.nom.vars.errors|length > 0 %}
+                    {{ form.nom.vars.errors[0].message }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="{{ form.description.vars.id }}" class="col-sm-3 col-form-label">Description</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.description, {'attr': {'class': form.description.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Description...', 'rows': 5}}) }}
+            <div class="invalid-feedback">
+                {% if form.description.vars.errors|length > 0 %}
+                    {{ form.description.vars.errors[0].message }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary me-2">{{ button_label|default('Soumettre') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,53 @@
+{% extends '_layout.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste des évaluations</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Liste des évaluations</h6>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date de l'évaluation</th>
+                                <th>Utilisateur évalué</th>
+                                <th>Juge</th>
+                                <th>Score moyen</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for evaluation in evaluations %}
+                                <tr>
+                                    <td>{{ evaluation.id }}</td>
+                                    <td>{{ evaluation.dateEvaluation|date('d/m/Y') }}</td>
+                                    <td>{{ evaluation.utilisateur.nom }}</td>
+                                    <td>{{ evaluation.juge.nom }}</td>
+                                    <td>{{ evaluation.scoreMoyenne is not null ? evaluation.scoreMoyenne : 'Non évalué' }}</td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">Aucune évaluation trouvée.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

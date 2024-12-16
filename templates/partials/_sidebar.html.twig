@@ -1,0 +1,108 @@
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <a href="#" class="sidebar-brand">
+            Gestion<span>Pro</span>
+        </a>
+        <div class="sidebar-toggler not-active">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="sidebar-body">
+        <ul class="nav">
+            <li class="nav-item nav-category">Ressources humaines</li>
+            <li class="nav-item">
+                <a href="{{path('app_utilisateur_index')}}" class="nav-link">
+                    <i class="link-icon" data-feather="users"></i>
+                    <span class="link-title">Employés</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#departement" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="hexagon"></i>
+                    <span class="link-title">Département</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="departement">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('app_departement_new') }}" class="nav-link">Nouveau</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_departement_index') }}" class="nav-link">Liste</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#conge" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="hexagon"></i>
+                    <span class="link-title">Congé</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="conge">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('app_demande_conge_new') }}" class="nav-link">Nouveau</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_demande_conge_index') }}" class="nav-link">Liste en cours</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#poste" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="monitor"></i>
+                    <span class="link-title">Poste</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="poste">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('app_poste_new') }}" class="nav-link">Création</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_poste_index') }}" class="nav-link">Liste</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#offre-emploi" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="folder"></i>
+                    <span class="link-title">Offre d'emploi</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="offre-emploi">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{path('app_recrutement_offre_emploi_new')}}" class="nav-link">Création</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path ('app_recrutement_offre_emploi_index')}}" class="nav-link">Liste</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#candidat" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="user-plus"></i>
+                    <span class="link-title">Candidats</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="candidat">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('app_recrutement_candidat_new') }}" class="nav-link">Nouveau</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_recrutement_candidat_index') }}" class="nav-link">Liste</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

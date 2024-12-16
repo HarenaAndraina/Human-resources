@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poste{% endblock %}
+
+{% block body %}
+    <h1>Poste</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ poste.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ poste.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ poste.description }}</td>
+            </tr>
+            <tr>
+                <th>Responsabilites</th>
+                <td>{{ poste.responsabilites }}</td>
+            </tr>
+            <tr>
+                <th>Exigences</th>
+                <td>{{ poste.exigences }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_poste_index') }}">back to list</a>
+
+    <a href="{{ path('app_poste_edit', {'id': poste.id}) }}">edit</a>
+{% endblock %}

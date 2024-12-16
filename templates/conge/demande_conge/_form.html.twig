@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+<div class="row mb-3">
+    <label for="{{ form.date_debut.vars.id }}" class="col-sm-3 col-form-label">Date de début</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.date_debut, {'attr': {'class': form.date_debut.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.date_debut.vars.errors|length > 0 %}
+                {{ form.date_debut.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="{{ form.date_fin.vars.id }}" class="col-sm-3 col-form-label">Date de fin</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.date_fin, {'attr': {'class': form.date_fin.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control'}}) }}
+        <div class="invalid-feedback">
+            {% if form.date_fin.vars.errors|length > 0 %}
+                {{ form.date_fin.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="{{ form.description.vars.id }}" class="col-sm-3 col-form-label">Description</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.description, {'attr': {'class': form.description.vars.errors|length > 0 ? 'form-control is-invalid' : 'form-control', 'placeholder': 'Description de la demande', 'rows': 5}}) }}
+        <div class="invalid-feedback">
+            {% if form.description.vars.errors|length > 0 %}
+                {{ form.description.vars.errors[0].message }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="{{ form.utilisateur.vars.id }}" class="col-sm-3 col-form-label">Utilisateur</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.utilisateur, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="{{ form.typeConge.vars.id }}" class="col-sm-3 col-form-label">Type de Congé</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.typeConge, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<button type="submit" class="btn btn-primary me-2">{{ button_label|default('Soumettre') }}</button>
+{{ form_end(form) }}

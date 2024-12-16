@@ -1,0 +1,70 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block cssplugins %}
+	<link rel="stylesheet" href="{{ asset('assets/css/entity-list.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+	<nav class="page-breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#">Offre</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Liste</li>
+		</ol>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h6 class="card-title">Liste des offres d'emploi</h6>
+					<a href="{{ path('app_recrutement_offre_emploi_new') }}" type="button" class="btn btn-primary btn-icon-text">
+						<i class="btn-icon-prepend" data-feather="plus-circle"></i>
+						Nouvelle offre
+					</a>
+
+					<div class="table-responsive pt-3">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Titre</th>
+									<th>Description</th>
+									<th>Poste</th>
+									<th>Date d'éxpiration</th>
+									<th>Statut</th>
+									<th class="text-center">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for offre_emploi in offre_emplois %}
+									<tr>
+										<td>{{ offre_emploi.titre }}</td>
+										<td>{{ offre_emploi.description }}</td>
+										<td>{{ offre_emploi.poste.nom }}</td>
+										<td>
+											{{ offre_emploi.dateExpiration ? offre_emploi.dateExpiration|date('d-m-Y') : 'Aucune' }}
+										</td>
+										<td>{{ offre_emploi.statut }}</td>
+										<td class="actions-column">
+											<a href="{{ path('app_recrutement_offre_emploi_show', {'id': offre_emploi.id}) }}"
+											   class="btn btn-primary">
+												Afficher les détails
+											</a>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="9">Pas encore d'offres.</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

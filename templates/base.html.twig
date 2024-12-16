@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}GestionPro{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/core/core.css') }}">
+    {% block cssplugins %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/favicon.png') }}">
+</head>
+<body>
+<div class="main-wrapper">
+    {% block body %}{% endblock %}
+
+    <script src="{{ asset('assets/vendors/core/core.js') }}"></script>
+    {% block jsplugins %}{% endblock %}
+    <script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/template.js') }}"></script>
+    {% block customjs %}{% endblock %}
+</div>
+</body>
+</html>

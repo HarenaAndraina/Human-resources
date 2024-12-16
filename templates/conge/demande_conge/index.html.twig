@@ -1,0 +1,61 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Liste des demande de congé en cours
+{% endblock %}
+
+{% block breadcrumbs %}
+	<nav class="page-breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="#">Demandes congés</a>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">Liste</li>
+		</ol>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h6 class="card-title">Liste des demandes de congés</h6>
+
+					<div class="table-responsive pt-3">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Date_debut</th>
+									<th>Date_fin</th>
+									<th>Description</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for demande_conge in demande_conges %}
+									<tr>
+										<td>{{ demande_conge.id }}</td>
+										<td>{{ demande_conge.dateDebut ? demande_conge.dateDebut|date('Y-m-d') : '' }}</td>
+										<td>{{ demande_conge.dateFin ? demande_conge.dateFin|date('Y-m-d') : '' }}</td>
+										<td>{{ demande_conge.description }}</td>
+										<td>
+											<a type="button" class="btn btn-primary btn-icon-text">
+												<i class="btn-icon-prepend" data-feather="file"></i>
+												Analyser
+											</a>
+										</td>
+									</tr>
+								</td>
+							</tbody>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div></div></div>{% endblock %}
